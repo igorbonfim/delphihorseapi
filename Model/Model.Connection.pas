@@ -72,10 +72,10 @@ procedure Disconect;
 begin
   if Assigned(FConnection) then
   begin
-      if FConnection.Connected then
-          FConnection.Connected := false;
+    if FConnection.Connected then
+        FConnection.Connected := false;
 
-      FConnection.Free;
+    FConnection.Free;
   end;
 end;
 
