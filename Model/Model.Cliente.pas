@@ -77,7 +77,7 @@ begin
   if ID_CLIENTE <= 0 then
   begin
     Result := false;
-    erro := 'Informe o id. cliente';
+    erro := 'Informe o id do cliente';
     exit;
   end;
 

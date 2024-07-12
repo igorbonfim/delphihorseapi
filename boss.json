@@ -1,0 +1,11 @@
+{
+	"name": "GBSwagger",
+	"description": "",
+	"version": "2.0.1",
+	"homepage": "",
+	"mainsrc": "Source",
+	"projects": [],
+	"dependencies": {
+		"github.com/gabrielbaltazar/gbswagger": "^3.0.7"
+	}
+}

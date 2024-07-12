@@ -3,7 +3,8 @@ unit Controller.Cliente;
 interface
 
 uses Horse, System.JSON, System.SysUtils, Model.Cliente,
-     FireDAC.Comp.Client, Data.DB, DataSet.Serialize;
+     FireDAC.Comp.Client, Data.DB, DataSet.Serialize,
+     Horse.GBSwagger.Register, Horse.GBSwagger.Controller;
 
 procedure Registry;
 
@@ -42,9 +43,9 @@ var
 begin
   try
     cli := TCliente.Create;
-    cli.ID_CLIENTE := req.Params['id'].ToInteger;
+    cli.ID_CLIENTE := Req.Params['id'].ToInteger;
   except
-    Res.Send('Erro ao conectar no banco de dados').Status(500);
+    Res.Send('Erro ao conectar com o  banco de dados').Status(500);
     exit;
   end;
 
@@ -74,7 +75,7 @@ begin
   try
     cli := TCliente.Create;
   except
-    Res.Send('Erro ao conectar no banco de dados').Status(500);
+    Res.Send('Erro ao conectar com o banco de dados').Status(500);
     exit;
   end;
 
@@ -82,9 +83,9 @@ begin
     try
       body := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(req.Body), 0) as TJSONValue;
 
-      cli.NOME := body.GetValue<string>('nome', '');
-      cli.EMAIL := body.GetValue<string>('email', '');
-      cli.FONE := body.GetValue<string>('fone', '');
+      cli.NOME := body.GetValue<string>('NOME', '');
+      cli.EMAIL := body.GetValue<string>('EMAIL', '');
+      cli.FONE := body.GetValue<string>('FONE', '');
       cli.Inserir(erro);
 
       body.Free;
@@ -188,11 +189,12 @@ end;
 
 procedure Registry;
 begin
-  THorse.Get('/cliente', ListarClientes);
-  THorse.Get('/cliente/:id', ListarClientesID);
-  THorse.Post('/cliente', AddCliente);
-  THorse.Put('/cliente', EditarCliente);
-  THorse.Delete('/cliente/id', DeleteCliente);
+  THorse.Group.Prefix('v1')
+  .Get('/cliente', ListarClientes)
+  .Get('/cliente/:id', ListarClientesID)
+  .Post('/cliente', AddCliente)
+  .Put('/cliente/:id', EditarCliente)
+  .Delete('/cliente/:id', DeleteCliente);
 end;
 
 end.

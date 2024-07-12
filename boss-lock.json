@@ -1,0 +1,14 @@
+{
+	"hash": "365c23c344e2a0c749c4b5613d78a2b6",
+	"updated": "2024-07-11T23:13:44.4121747-03:00",
+	"installedModules": {
+		"github.com/gabrielbaltazar/gbswagger": {
+			"name": "gbswagger",
+			"version": "3.0.7",
+			"hash": "0dfdc9b52765603ec81732f75513f384",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}
